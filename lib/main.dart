@@ -1,11 +1,7 @@
-import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/widgets.dart';
-import 'package:samurais_application/app.dart';
-import 'package:user_repository/user_repository.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:samurais_application/app/app.module.dart';
 
 void main() {
-  runApp(App(
-    authenticationRepository: AuthenticationRepository(),
-    userRepository: UserRepository(),
-  ));
+  runApp(ModularApp(module: AppModule(), child: AppWidget()));
 }
