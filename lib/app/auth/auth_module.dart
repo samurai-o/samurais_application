@@ -13,9 +13,9 @@ class AuthModule extends Module {
         ChildRoute('/', child: (context, args) => AuthWidget(), children: [
           ChildRoute(
             '/login',
-            child: (context, args) => LoginPage(), transition: TransitionType.fadeIn
+            child: (context, args) => LoginPage()
           ),
-          ChildRoute('/register', child: (context, args) => RegisterPage(), transition:TransitionType.fadeIn)
+          ChildRoute('/register', child: (context, args) => RegisterPage())
         ])
       ];
 }

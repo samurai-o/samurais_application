@@ -14,8 +14,9 @@ class AppModule extends Module {
   List<Bind> get binds => [
         Bind.factory((i) => AuthenticationRepository()),
         Bind.factory((i) => UserRepository()),
+        Bind.factory((i) => AuthenticationState.unknown()),
         Bind.lazySingleton<AuthenticationBloc>((i) => AuthenticationBloc(
-            authenticationRepository: i(), userRepository: i())),
+            authenticationRepository: i(), userRepository: i(), authenticationState: i())),
       ];
 
   @override
@@ -23,7 +24,7 @@ class AppModule extends Module {
         ChildRoute('/', child: (context, args) => InitialPage()),
         ModuleRoute('/home', module: HomeModule(), guards: [AuthGuard()]),
         ModuleRoute('/auth',
-            module: AuthModule(), transition: TransitionType.scale)
+            module: AuthModule(), transition: TransitionType.fadeIn)
       ];
 }
 
@@ -47,6 +48,7 @@ class _AppState extends State<AppWidget> {
           title: 'My Smart App',
           theme: ThemeData(primarySwatch: Colors.blue),
           initialRoute: '/',
+          home: Text("测试"),
         ).modular(),
       ),
     );

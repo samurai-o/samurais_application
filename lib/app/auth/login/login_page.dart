@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:components/components.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:samurais_application/tools/tools.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -10,110 +9,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginState extends State<LoginPage> {
-
-  Widget inputAccount() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        // Text(
-        //   '邮箱',
-        //   style: kLabelStyle,
-        // ),
-        SizedBox(height: 20.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
-              color: Colors.black54,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.email,
-                color: Colors.black54,
-              ),
-              hintText: '请输入账号',
-              hintStyle: kHintTextStyle,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget inputPassword() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        // Text(
-        //   '密码',
-        //   style: kLabelStyle,
-        // ),
-        SizedBox(height: 20.0),
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: kBoxDecorationStyle,
-          height: 60.0,
-          child: TextField(
-            obscureText: true,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.black54,
-              ),
-              hintText: '请输入密码',
-              hintStyle: kHintTextStyle,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget buildForgotPasswordBtn() {
-    return Container(
-      alignment: Alignment.centerRight,
-      child: TextButton(
-        onPressed: () {
-          Modular.to.pushNamed('/auth/register');
-        },
-        child: Text(
-          '忘记密码?',
-          style: kLabelStyle,
-        ),
-      ),
-    );
-  }
-
-  Widget buildRememberMeCheckbox() {
-    return Container(
-      height: 20.0,
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
-            child: CustomCheckbox(isChecked: true, selectedIconColor: Color(0xFF398AE5), backgroundColor: Color(0xFF398AE5),),
-          ),
-          SizedBox(width: 5.0,),
-          Text(
-            '记住密码',
-            style: kLabelStyle,
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget buildLoginBtn() {
     return Container(
@@ -145,18 +40,46 @@ class _LoginState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        inputAccount(),
-        SizedBox(height: 25.0,),
-        inputPassword(),
+        SizedBox(height: 20.0),
+        CustomInput(
+          keyboardType: TextInputType.emailAddress,
+          hintText: '请输入邮箱',
+          hintColor: Colors.white,
+          prefixIcon: Icon(
+            Icons.email,
+            color: Colors.white,
+          ),
+        ),
+        SizedBox(height: 40.0,),
+        CustomInput(
+          keyboardType: TextInputType.visiblePassword,
+          hintText: '请输入密码',
+          hintColor: Colors.white,
+          prefixIcon: Icon(
+            Icons.lock,
+            color: Colors.white,
+          ),
+        ),
         SizedBox(height: 10.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            buildRememberMeCheckbox(),
-            buildForgotPasswordBtn()
+            CustomCheckbox(isChecked: true, selectedIconColor: Color(0xFF398AE5), backgroundColor: Color(0xFF398AE5),text: '记住密码',),
+            Container(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {
+                    Modular.to.pushNamed('/auth/register');
+                  },
+                  child: Text(
+                    '忘记密码?',
+                    style: kLabelStyle,
+                  ),
+                ),
+              ),
           ],
         ),
-        buildLoginBtn(),
+        CustomButton(),
       ],
     );
   }
