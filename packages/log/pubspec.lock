@@ -20,15 +20,8 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  log:
-    dependency: "direct main"
-    description:
-      path: "../log"
-      relative: true
-    source: path
-    version: "0.0.0"
   logger:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: logger
       url: "https://pub.flutter-io.cn"

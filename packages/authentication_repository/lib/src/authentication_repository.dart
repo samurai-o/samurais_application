@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:authentication_repository/tools.dart';
+
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {

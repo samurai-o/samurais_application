@@ -11,7 +11,7 @@ class AuthGuard extends RouteGuard {
   @override
   Future<bool> canActivate(String path, ModularRoute router) async {
     AuthenticationStatus status = Modular.get<AuthenticationState>().status;
-    log.d(status);
+    log.i(status);
     return status == AuthenticationStatus.authenticated;
   }
 }

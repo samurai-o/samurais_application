@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:components/components.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:samurais_application/services/services.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -9,6 +10,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginState extends State<LoginPage> {
+
+  Future<bool> login() async {
+    UserService services = Modular.get<UserService>();
+    await services.login(username: '11', password: '1111');
+    return true;
+  }
 
   Widget buildLoginBtn() {
     return Container(
@@ -38,6 +45,8 @@ class _LoginState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Column(
       children: [
         SizedBox(height: 20.0),
@@ -79,7 +88,15 @@ class _LoginState extends State<LoginPage> {
               ),
           ],
         ),
-        CustomButton(),
+        SizedBox(height: 40.0),
+        CustomButton(
+          text: '登录',
+          width: width,
+          height: 60,
+          borderRadius: 40.0,
+          loadingColor: Color(0xFF527DAA),
+          onProcess: login,
+        ),
       ],
     );
   }

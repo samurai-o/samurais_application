@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+
+final log = Logger();
 
 final kHintTextStyle = TextStyle(
   color: Colors.white54,

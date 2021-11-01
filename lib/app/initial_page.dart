@@ -22,7 +22,7 @@ class InitialPage extends StatelessWidget {
           }
         },
         child: Scaffold(
-          body: Center(child: Text('loading'),),
+          body: Center(child: CircularProgressIndicator(color: Colors.black45,)),
         ),
     );
   }

@@ -3,10 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:samurais_application/app/auth/login/login_page.dart';
 import 'package:samurais_application/app/auth/register/register_page.dart';
+import 'package:samurais_application/services/services.dart';
 
 class AuthModule extends Module {
   @override
-  List<Bind> get binds => [];
+  List<Bind> get binds => [
+    Bind.singleton<UserService>((i) => UserService(authenticationRepository: i()))
+  ];
 
   @override
   List<ModularRoute> get routes => [
@@ -26,14 +29,14 @@ class AuthWidget extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
+            padding: EdgeInsets.fromLTRB(15.0, 110.0, 100.0, 20.0),
             child: Text(
               'Hello',
               style: TextStyle(
-                fontFamily: '.SF UI Text',
-                fontSize: 80.0,
-                color: Colors.white,
-                fontWeight: FontWeight.bold
+                  fontFamily: '.SF UI Text',
+                  fontSize: 80.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold
               ),
             ),
           ),
