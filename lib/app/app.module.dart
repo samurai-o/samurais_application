@@ -12,11 +12,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 class AppModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind.factory((i) => AuthenticationRepository()),
-        Bind.factory((i) => UserRepository()),
-        Bind.factory((i) => AuthenticationState.unknown()),
+        Bind.factory((i) => AuthenticationRepository(), export: true),
+        Bind.factory((i) => UserRepository(), export: true),
+        Bind.factory((i) => AuthenticationState.unknown(), export: true),
         Bind.lazySingleton<AuthenticationBloc>((i) => AuthenticationBloc(
-            authenticationRepository: i(), userRepository: i(), authenticationState: i())),
+            authenticationRepository: i(), userRepository: i(), authenticationState: i()), export: true),
       ];
 
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-@immutable
+
 class CustomInput extends StatefulWidget {
   double height;
   TextInputType keyboardType;

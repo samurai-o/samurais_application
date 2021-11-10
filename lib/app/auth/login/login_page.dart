@@ -1,6 +1,8 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:components/components.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:samurais_application/authentication/authentication.dart';
 import 'package:samurais_application/services/services.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,8 +14,8 @@ class LoginPage extends StatefulWidget {
 class _LoginState extends State<LoginPage> {
 
   Future<bool> login() async {
-    UserService services = Modular.get<UserService>();
-    await services.login(username: '11', password: '1111');
+    UserService service = Modular.get<UserService>();
+    await service.login(username: '11', password: '1111');
     return true;
   }
 

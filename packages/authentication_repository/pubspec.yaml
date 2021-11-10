@@ -10,3 +10,5 @@ dependencies:
     git:
       url: git@github.com:samurai-o/app_tools.git
       ref: main
+  samapi:
+    path: ../samapi

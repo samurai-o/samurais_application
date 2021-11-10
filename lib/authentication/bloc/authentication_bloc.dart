@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:bloc/bloc.dart';
-import 'package:components/components.dart';
+import 'package:tools/tools.dart';
 import 'package:equatable/equatable.dart';
 import 'package:user_repository/user_repository.dart';
 
@@ -21,7 +21,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     on<AuthenticationStatusChanged>(_onAuthenticationStatusChanged);
     on<AuthenticationLogoutRequested>(_onAuthenticationLogoutRequested);
     _authenticationStatusSubscription = _authenticationRepository.status.listen(
-          (status) => add(AuthenticationStatusChanged(status)),
+          (status) => { add(AuthenticationStatusChanged(status))
+          },
     );
   }
 
@@ -40,7 +41,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       AuthenticationStatusChanged event,
       Emitter<AuthenticationState> emit,
       ) async {
-    log.e(event.status);
+    Log.info(tag: "info", message: event.status);
     switch (event.status) {
       case AuthenticationStatus.unauthenticated:
         return emit(const AuthenticationState.unauthenticated());
@@ -68,5 +69,10 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     } catch (_) {
       return null;
     }
+  }
+
+  Future<void> logIn({ required String username, required String password, }) async {
+    Log.debug(tag: "username", message: username);
+    _authenticationRepository.logIn(username: username, password: password);
   }
 }

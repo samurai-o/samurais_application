@@ -8,7 +8,7 @@ import 'package:samurais_application/services/services.dart';
 class AuthModule extends Module {
   @override
   List<Bind> get binds => [
-    Bind.singleton<UserService>((i) => UserService(authenticationRepository: i()))
+    Bind.lazySingleton<UserService>((i) => UserService(authenticationRepository: i()))
   ];
 
   @override

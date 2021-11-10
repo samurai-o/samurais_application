@@ -1,5 +1,3 @@
+import 'package:logger/logger.dart';
 
-
-import 'package:tools/tools.dart';
-
-const logger = Log.info;
+final log = Logger();

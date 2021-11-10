@@ -1,11 +1,18 @@
 import 'dart:async';
+import 'package:authentication_repository/src/service.dart';
+import 'package:samapi/samapi.dart';
 
-import 'package:authentication_repository/tools.dart';
+final api = Samapi();
 
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
   final _controller = StreamController<AuthenticationStatus>();
+  // ignore: unused_field
+  final AuthService _authService;
+
+  AuthenticationRepository({required AuthService service})
+      : _authService = service;
 
   Stream<AuthenticationStatus> get status async* {
     await Future<void>.delayed(const Duration(seconds: 1));
@@ -13,11 +20,21 @@ class AuthenticationRepository {
     yield* _controller.stream;
   }
 
-  Future<void> logIn({ required String username, required String password, }) async {
-    await Future.delayed(const Duration(milliseconds: 300), () => _controller.add(AuthenticationStatus.authenticated),);
+  Future<void> logIn({
+    required String username,
+    required String password,
+  }) async {
+    var res = await api.post(path: path);
+    _controller.add(AuthenticationStatus.authenticated);
   }
 
-  void logOut() { _controller.add(AuthenticationStatus.unauthenticated); }
+  void action(AuthenticationStatus event) {
+    _controller.add(event);
+  }
+
+  void logOut() {
+    _controller.add(AuthenticationStatus.unauthenticated);
+  }
 
   void dispose() => _controller.close();
 }

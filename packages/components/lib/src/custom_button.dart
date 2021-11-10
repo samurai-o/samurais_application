@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:components/tools/constants.dart';
 
 enum CustomButtonState { init, loading, done }
 
